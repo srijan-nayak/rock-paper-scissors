@@ -1,20 +1,32 @@
-// 1. declare and initialize playerWins and computerWins to 0
-// 2. play 5 rounds by repeating the following 5 times:
-//   1. get computer's play and store it in computerSelection
-const computerSelection = computerPlay();
-//   2. get user's play and store it in playerSelection
-const playerSelection = playerPlay();
-//   3. decide winner by comparing computerSelection and playerSelection
-//      and store it in winner
-const result = playRound(playerSelection, computerSelection);
-console.log(`Computer played ${computerSelection}`);
-console.log(`You played ${playerSelection}`);
-console.log(result);
-//   4. if winner is player increment playerWins
-//   5. if winner is computer increment computerWins
-// 3. if playerWins is greater than computerWins declare player as winner
-// 4. if computerWins is greater than computerWins declare player as loser
-// 5. else declare tie
+game();
+
+function game() {
+  let computerWins = 0;
+  let playerWins = 0;
+
+  for (let i = 0; i < 5; i++) {
+    const computerSelection = computerPlay();
+    const playerSelection = playerPlay();
+    const result = playRound(playerSelection, computerSelection);
+    console.log(`Computer played ${computerSelection}`);
+    console.log(`You played ${playerSelection}`);
+    console.log(result);
+
+    if (result.includes("win")) {
+      playerWins++;
+    } else if (result.includes("lose")) {
+      computerWins++;
+    }
+  }
+
+  console.log(`Player wins: ${playerWins}`);
+  console.log(`Computer wins: ${computerWins}`);
+  if (playerWins > computerWins) {
+    console.log("You win the game!");
+  } else if (computerWins > playerWins) {
+    console.log("You lost the game!");
+  }
+}
 
 function computerPlay() {
   const randomNumber = Math.floor(Math.random() * 3);
